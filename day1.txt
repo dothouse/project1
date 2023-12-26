@@ -1,0 +1,20 @@
+https://www.kaggle.com/datasets/davidcariboo/player-scores/data
+https://www.kaggle.com/datasets/hugomathien/soccer?resource=download
+https://github.com/JanVanHaaren/soccer-analytics-resources?tab=readme-ov-file
+
+
+4. 축구게임 능력치 데이터
+https://sofifa.com/
+5. soccerdata library
+https://soccerdata.readthedocs.io/en/latest/datasources/SoFIFA.html
+축구클럽 elo
+http://clubelo.com/API
+
+
+
+
+
+https://github.com/eddwebster/football_analytics?tab=readme-ov-file#data-sources
+https://github.com/sanjitva/Predicting-Football-Player-Transfer-Values
+
+
