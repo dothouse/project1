@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+ table{ border-collapse : collapse; }  /*이중선 제거*/
+ th,td{
+      width: 200px;
+      height: 50px;
+      text-align: center;
+      border: 1px solid #000;
+
+      vertical-align: top;	/* 위 */
+      vertical-align: bottom;   /* 아래 */
+      vertical-align: middle;   /* 가운데 */
+    }
+</style>
+
+<head>
+    <div class="p-3 text-bg-dark">
+        <h2>추천 숙소는 아래와 같습니다.</h2>
+    </div>
+</head>
+    <body>
+        <div class= "badge bg-light text-dark p-2 text-start">
+            <h3>원하는 숙소를 선택해주세요</h3>
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <h4>숙소1</h4>
+                    <p>숙소이름 -> {{pension_list[0].title}}</p>
+                    <p>숙소점수 -> {{pension_list[0].score}}</p>
+                    <button type="button" class="btn btn-primary"
+                            onclick="location.href='/pension/pension1'">정보</button></li>
+                </li>
+
+                <li class="list-group-item">
+                    <h4>숙소2</h4>
+                    <p>숙소이름 -> {{pension_list[1].title}}</p>
+                    <p>숙소점수 -> {{pension_list[1].score}}</p>
+                    <button type="button" class="btn btn-primary"
+                            onclick="location.href='/pension/pension2'">정보</button></li>
+
+                <li class="list-group-item">
+                    <h4>숙소3</h4>
+                    <p>숙소이름 -> {{pension_list[2].title}}</p>
+                    <p>숙소점수 -> {{pension_list[2].score}}</p>
+                    <button type="button" class="btn btn-primary"
+                            onclick="location.href='/pension/pension3'">정보</button></li>
+            </ul>
+        </div>
+
+        <div class= "">
+            <form action='/result' method="post" class = 'dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                 <p>숙소를 결정하셨습니까?</p>
+                 <select name="finalPension" id="final">
+                     <option value="finalPension1">숙소1</option>
+                     <option value="finalPension2">숙소2</option>
+                     <option value="finalPension3">숙소3</option>
+                 <input type = 'submit' class="btn btn-warning">
+            </form>
+        </div>
+    </body>
+</html>
+{% endblock %}

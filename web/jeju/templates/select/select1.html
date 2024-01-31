@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .list-group {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f5f5f5;
+
+}
+</style>
+
+<head>
+    <div class=" container p-3 text-bg-dark">
+        <h1>제주도 한달살기 추천시스템</h1>
+    </div>
+</head>
+
+<body>
+<div class='container'>
+    <div>
+        <form action='select2' method="post"
+              class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'
+              data-bs-theme="light" name='tour_submit' onsubmit="return chkSum();">
+            <h4>여행타입을 골라주세요</h4>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 " style="padding-bottom: 0px;  padding-top: 0px;">
+                <div class="col">
+                    <!--  dropdown menu 선택시 name="month" 의 <option value="monthType1"> 이 전송됨-->
+                    <!--  month = monthType1 -->
+                    <div class="list-group dropdown1 ">
+                        <h4>여행타입</h4>
+                        <select name="month" id="id_month" class="btn btn-secondary btn-lg">
+                            <option value="monthType1">일반</option>
+                            <option value="monthType2">아이 동반</option>
+                            <option value="monthType3">체험</option>
+                            <option value="monthType4">맛집</option>
+                            <option value="monthType5">자연 탐방</option>
+                        </select><br>
+                    </div>
+                    <!-- 선택지에 따른 선택지 변화-->
+
+                    <!-- 기본 선택지 -->
+                    <!-- https://imivory.tistory.com/entry/javascript-selectbox-%EC%84%A0%ED%83%9D%EC%97%90-%EB%94%B0%EB%9D%BC-%EB%91%90%EB%B2%88%EC%A7%B8-selectbox-%EA%B0%92-%EB%B3%80%ED%99%94-->
+                    <div class="list-group">
+                        <h4>선호관광지 유형</h4>
+                        <select name='spot1' id='id_spot1' onchange="categoryChange(this)"
+                                class="btn btn-secondary btn-lg">
+                            <option value="">선호을 선택하세요</option>
+                            <option value="spot1Type1">경관, 포토, 스팟</option>
+                            <option value="spot1Type2">반려동물, 동반, 애견</option>
+                            <option value="spot1Type3">체험, 레저</option>
+                            <option value="spot1Type4">도보, 등산, 오름, 숲길</option>
+                            <option value="spot1Type5">테마, 실내, 박물관, 미술, 유적지, 역사</option>
+                        </select><br>
+                    </div>
+                    <!--변화하는 선택지-->
+                    <!--java script랑 연동-->
+                    <div class="list-group">
+                        <h4>선호관광지 세부유형</h4>
+                        <select name='spot2' id="id_spot2" class="btn btn-secondary btn-lg">
+                            <option value="">세부유형을 선택하세요</option>
+                        </select><br>
+                    </div>
+                    <div class="list-group">
+                        <h4>맛집</h4>
+                        <select name="food" id="id_food" class="btn btn-secondary btn-lg">
+                            <option value="foodType1">아시아음식(일식, 중식, 아시아)</option>
+                            <option value="foodType2">양식</option>
+                            <option value="foodType3">술집</option>
+                            <option value="foodType4">간식, 카페, 베이커리</option>
+                            <option value="foodType5">패스트푸드, 피자, 치킨</option>
+                            <option value="foodType6">한식</option>
+                        </select><br>
+                    </div>
+                    <div class="list-group">
+                        <h4>반려동물 </h4>
+                        <select name="pet" id="id_pet" class="btn btn-secondary btn-lg">
+                            <option value="petType1">미동반</option>
+                            <option value="petType2">동반</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- checkbox 선택시 name="police" 이 전송  -->
+                <div class="col align-self-start">
+                    <div style="border: 1px solid #ddd; margin-bottom: 5px;">
+                        <h4>숙소시설 </h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"> 수영장 <input type="checkbox" name="pool" value="add_pool"></li>
+                            <li class="list-group-item"> 마당 <input type="checkbox" name="garden" value="add_garden">
+                            </li>
+                            <li class="list-group-item"> 바다 <input type="checkbox" name="sea" value="add_sea"></li>
+                            <li class="list-group-item"> 관리비 없음 <input type="checkbox" name="nocost" value="add_nocost">
+                            </li>
+                            <li class="list-group-item"> 대중교통 <input type="checkbox" name="nocost" value="add_bus"></li>
+                        </ul>
+                    </div>
+                    <div style="border: 1px solid #ddd; margin-bottom: 30px;">
+                        <h4>추가 고려사항</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"> 치안(경찰서/지구대) <input type="checkbox" name="police"
+                                                                            value="add_police"></li>
+                            <li class="list-group-item"> 병원 <input type="checkbox" name="hospital" value="add_hospital">
+                            </li>
+                            <li class="list-group-item"> 은행 <input type="checkbox" name="bank" value="add_bank"></li>
+                            <li class="list-group-item"> 마트 <input type="checkbox" name="mart" value="add_mart"></li>
+                            <li class="list-group-item"> 소품샵/기념품샵 <input type="checkbox" name="gift" value="add_gift">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <input type='submit' class="btn btn-warning" value="선택완료" onclick='test()'/>
+        </form>
+    </div>
+</div>
+</body>
+
+<script>
+
+    <!--선호 관광지 세부 옵션을 변동하는 -->
+    function categoryChange(e) {
+
+        var id_spot2_spot2Type1 = ["해변/드라이브", "힐링/휴식"];
+        var id_spot2_spot2Type2 = ["반려동물"];
+        var id_spot2_spot2Type3 = ["레저/수상/해수욕장", "승마/이색/마을/어린이"];
+        var id_spot2_spot2Type4 = ["하이킹"];
+        var id_spot2_spot2Type5 = ["유적/역사", "실내/미술/박물관/테마"];
+        var target = document.getElementById("id_spot2");
+
+        if(e.value == "spot1Type1") var d = id_spot2_spot2Type1;
+        else if(e.value == "spot1Type2") var d = id_spot2_spot2Type2;
+        else if(e.value == "spot1Type3") var d = id_spot2_spot2Type3;
+        else if(e.value == "spot1Type4") var d = id_spot2_spot2Type4;
+        else if(e.value == "spot1Type5") var d = id_spot2_spot2Type5;
+
+        target.options.length = 0;
+
+        for (let x = 0; x < d.length; x++) {
+            var opt = document.createElement("option");
+            opt.value = d[x];
+            opt.innerHTML = d[x];
+            target.appendChild(opt);
+        }
+    }
+        <!-- alert /// history.back이 되지 않아서  -->
+        <!-- select2_views에 가서 spot1 == '' 또는 request.form['spot'] 값의 여부에 따라 전 페이지 redirect (if, try 사용가능)  -->
+        function test() {
+            var selectElement = document.getElementById('id_spot1');
+            var selectedValue = selectElement.value;
+
+            // 선택한 값이 빈 문자열인 경우
+            if (selectedValue === "") {
+                alert('선호관광유형을 선택하지 않았습니다. 다시 선택해주세요.');
+                return; // 선택한 값이 빈 문자열이면 더 이상의 동작 수행 안 함
+            }
+
+            // 선택한 값이 빈 문자열이 아닌 경우, 원하는 동작 수행
+            // 예: 양식 제출 등
+            // document.forms[0].submit(); // 예제: 첫 번째 양식 제출
+
+            // 여기에 이전 화면으로 돌아가는 코드를 추가할 수 있습니다.
+            history.back(); // 브라우저의 이전 페이지로 이동
+        }
+
+
+</script>
+{% endblock %}

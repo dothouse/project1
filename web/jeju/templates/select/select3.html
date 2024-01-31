@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+</style>
+
+<head>
+
+    <div class="container p-3 text-bg-dark">
+        <h1>숙소선택</h1>
+    </div>
+</head>
+<body>
+<!--숙소선택-->
+<div class='container '>
+    <div>
+        <input type="button" class="btn "
+               value="처음으로 가기" onclick="location.href='/select/select1';"
+               style="background-color : #7FFF00; float: left;"/>
+
+        <input type="button" class="btn "
+               value="뒤로가기" onclick="history.back();" style="background-color : #caacd7; float: right;"/>
+
+    </div>
+    <h2> 숙소 정보를 확인하세요</h2>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% if pension1_chk == 1 %}
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>{{ pension1_score.name.values[0] }}</h4>
+                    <hr>
+                    {% if pension1_detail.rating != 0 %}
+                    <p>리뷰평점 -> {{ pension1_detail.rating }}</p>
+                    {% else %}
+                    <p>리뷰평점 -> 미제공</p>
+                    {% endif %}
+
+                    <!-- filter.py에 쓴 함수 중 t_comma를 활용 -->
+                    <p>30일 가격 -> {{ pension1_detail.price | t_comma }}원</p>
+                    <hr>
+
+                    <p>주변 관광지 갯수 -> {{ pension1_score.tour_cnt.values[0] }}개</p>
+                    <p>주변 맛집 갯수 -> {{ pension1_score.food_cnt.values[0] }}개</p>
+                    <hr>
+
+                    <!-- 해당 값이 있을때만 표기   -->
+                    {% if select_value.hospital == 1 %}
+                    <p>주변 병원 갯수 -> {{ pension1_score.hospital_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.parm == 1 %}
+                    <p>주변 약국 갯수 -> {{ pension1_score.parm_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.mart == 1 %}
+                    <p>주변 마트 갯수 -> {{ pension1_score.mart_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.bank == 1 %}
+                    <p>주변 은행 갯수 -> {{ pension1_score.bank_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.police == 1 %}
+                    <p>주변 경찰서 갯수 -> {{ pension1_score.police_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.gift == 1 %}
+                    <p>주변 기념품샵 갯수 -> {{ pension1_score.gift_cnt.values[0] }}개</p>
+                    {% endif %}
+
+                    <form action='pension' method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="pension_name" value="{{ pension1_score.name.values[0] }}">
+                        <input type='submit' class="btn btn-primary" value='숙소 상세정보'>
+                    </form>
+
+                    <form action='tour' method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="finalPension" value="{{ pension1_score.name.values[0] }}">
+                        <input type='submit' class="btn btn-success" value='관광정보'>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <!-- pension1_chk가 없는 경우 표기  -->
+        {% else %}
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>숙소1</h4>
+                    <hr>
+                    <h1> 해당숙소 없음</h1>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+        {% if pension2_chk == 1 %}
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>{{ pension2_score.name.values[0] }}</h4>
+                    <hr>
+
+                    {% if pension2_detail.rating != 0 %}
+                    <p>리뷰평점 -> {{ pension2_detail.rating }}</p>
+                    {% else %}
+                    <p>리뷰평점 -> 미제공</p>
+                    {% endif %}
+                    <p>30일 가격 -> {{ pension2_detail.price | t_comma }}원</p>
+                    <hr>
+
+                    <p>주변 관광지 갯수 -> {{ pension2_score.tour_cnt.values[0] }}개</p>
+                    <p>주변 맛집 갯수 -> {{ pension2_score.food_cnt.values[0] }}개</p>
+                    <hr>
+
+                    {% if select_value.hospital == 1 %}
+                    <p>주변 병원 갯수 -> {{ pension2_score.hospital_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.parm == 1 %}
+                    <p>주변 약국 갯수 -> {{ pension2_score.parm_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.mart == 1 %}
+                    <p>주변 마트 갯수 -> {{ pension2_score.mart_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.bank == 1 %}
+                    <p>주변 은행 갯수 -> {{ pension2_score.bank_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.police == 1 %}
+                    <p>주변 경찰서 갯수 -> {{ pension2_score.police_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.gift == 1 %}
+                    <p>주변 기념품샵 갯수 -> {{ pension2_score.gift_cnt.values[0] }}개</p>
+                    {% endif %}
+
+                    <form action='pension' method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="pension_name" value="{{ pension2_score.name.values[0] }}">
+                        <input type='submit' class="btn btn-primary" value='숙소 상세정보'>
+                    </form>
+
+                    <form action='tour' method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="finalPension" value="{{ pension2_score.name.values[0] }}">
+                        <input type='submit' class="btn btn-success" value='관광정보'>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        {% else %}
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>숙소2</h4>
+                    <hr>
+                    <h1> 해당숙소 없음</h1>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if pension3_chk == 1 %}
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>{{ pension3_score.name.values[0] }}</h4>
+                    <hr>
+
+                    {% if pension3_detail.rating != 0 %}
+                    <p>리뷰평점 -> {{ pension3_detail.rating }}</p>
+                    {% else %}
+                    <p>리뷰평점 -> 미제공</p>
+                    {% endif %}
+                    <p>30일 가격 -> {{ pension3_detail.price | t_comma }}원</p>
+                    <hr>
+
+                    <p>주변 관광지 갯수 -> {{ pension3_score.tour_cnt.values[0] }}개</p>
+                    <p>주변 맛집 갯수 -> {{ pension3_score.food_cnt.values[0] }}개</p>
+                    <hr>
+
+
+                    {% if select_value.hospital == 1 %}
+                    <p>주변 병원 갯수 -> {{ pension3_score.hospital_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.parm == 1 %}
+                    <p>주변 약국 갯수 -> {{ pension3_score.parm_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.mart == 1 %}
+                    <p>주변 마트 갯수 -> {{ pension3_score.mart_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.bank == 1 %}
+                    <p>주변 은행 갯수 -> {{ pension3_score.bank_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.police == 1 %}
+                    <p>주변 경찰서 갯수 -> {{ pension3_score.police_cnt.values[0] }}개</p>
+                    {% endif %}
+                    {% if select_value.gift == 1 %}
+                    <p>주변 기념품샵 갯수 -> {{ pension3_score.gift_cnt.values[0] }}개</p>
+                    {% endif %}
+
+                    <form action='pension' method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="pension_name" value="{{ pension3_score.name.values[0] }}">
+                        <input type='submit' class="btn btn-primary" value='숙소 상세정보'>
+                    </form>
+
+                    <form action='tour' method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="finalPension" value="{{ pension3_score.name.values[0] }}">
+                        <input type='submit' class="btn btn-success" value='관광정보'>
+                    </form>
+
+                </li>
+            </ul>
+        </div>
+        {% else %}
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>숙소3</h4>
+                    <hr>
+                    <h1> 해당숙소 없음</h1>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+
+
+        <div class='col-lg-6 col-md-8 mx-auto' style='width: 400px'>
+            <form action='' method="post"
+                  class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'
+            '>
+            <h4>숙소를 결정하셨습니까?</h4>
+            <select name="finalPension" id="id_ final">
+                {% if pension1_chk == 1 %}
+                <option value="{{ pension1_score.name.values[0] }}">숙소1</option>
+                {% endif %}
+
+                {% if pension2_chk == 1 %}
+                <option value="{{ pension2_score.name.values[0] }}">숙소2</option>
+                {% endif %}
+
+                {% if pension3_chk == 1 %}
+                <option value="{{ pension3_score.name.values[0] }}">숙소3</option>
+                {% endif %}
+                <input type='submit' class="btn btn-warning" value="결정">
+            </select>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+</script>
+{% endblock %}

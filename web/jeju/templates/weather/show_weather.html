@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<body>
+<div class="container my-3">
+    <div>
+        <h1> 기온 그래프</h1>
+        <input type="button" class="btn "
+               value="처음으로 가기" onclick="location.href='/select/select1';"
+               style="background-color : #7FFF00; float: left;"/>
+
+        <input type="button" class="btn "
+               value="뒤로가기" onclick="history.back()" style="background-color : #caacd7; float: right;"/>
+    </div>
+    <div class="card">
+
+        <img src="data:image/jpeg;base64,{{ img_data }}" alt="Image Placeholder"
+             onclick="openImageInNewWindow('{{ img_data }}')">
+
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function openImageInNewWindow(imageData) {
+        var newWindow = window.open();
+        newWindow.document.write('<html><body><img src="data:image/jpeg;base64,{{ img_data }}" alt="Image Placeholder" /></body></html>');
+    }
+</script>
+{% endblock %}

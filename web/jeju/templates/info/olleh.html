@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+    <div class=" container p-3 text-bg-dark">
+        <h1>{{pension_name}} 주변 올레길 정보</h1>
+    </div>
+</head>
+<body>
+<div class="container my-3">
+    <div>
+        <h1>주변 올레길 정보</h1>
+        <input type="button" class="btn "
+               value="처음으로 가기" onclick="location.href='/select/select1';"
+               style="background-color : #7FFF00; float: left;"/>
+
+        <input type="button" class="btn "
+               value="뒤로가기" onclick="history.back()" style="background-color : #caacd7; float: right;"/>
+
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+            <tr class="table-dark">
+                <th>제목</th>
+                <th>주소</th>
+                <th>거리</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in range(df_haver|length) %}
+                <!-- df_haver_short.name이 존재하는 경우  -->
+                {% if df_haver_short.name[i]|length > 0 %}
+                    <!-- 거리가 10미만인 경우   -->
+                    {% if df_haver_short.haver[i] < 10 %}
+            <tr>
+                <td>
+                    {{ df_haver_short.name[i] }}
+                </td>
+                <td>
+                    {{ df_haver_short.addr[i] }}
+                </td>
+                <td>
+                    {{ df_haver_short.haver[i] }} Km
+                </td>
+            </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class='container'>
+        <div>
+            {{ iframe|safe }}
+        </div>
+    </div>
+
+</body>
+</html>
+
+{% endblock %}

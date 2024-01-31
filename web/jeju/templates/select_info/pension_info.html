@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    table{ height: 350px; }
+
+    .table60  td { width : 70px;}
+</style>
+<head>
+    <div class=" container">
+        <div class=" container p-3 text-bg-dark">
+            <h1>숙소정보</h1>
+        </div>
+    </div>
+</head>
+<body>
+
+<div class='container'>
+    <div>
+        <input type="button" class="btn "
+               value="처음으로 가기" onclick="location.href='/select/select1';"
+               style="background-color : #7FFF00; float: left;"/>
+        <input type="button" class="btn "
+               value="뒤로가기" onclick="location.href='/select/select3';"
+               style="background-color : #caacd7; float: right;"/>
+
+    </div>
+    <h2> {{ pension_detail[0].pensionID }}</h2>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <!--1번테이블-->
+        <div class='col'>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>기본정보</h4>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">옵션</th>
+                            <th scope="col">내용</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>지역</td>
+                            <td>{{ pension_detail[0].location}}</td>
+                        </tr>
+                        <tr>
+                            <td>주소</td>
+                            <td>{{ pension_detail[0].addr}}</td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td>{{ pension_detail[0].price | t_comma }}원</td>
+                        </tr>
+                        <tr>
+                            {% if pension_detail[0].rating != 0 %}
+                            <td>리뷰평점</td>
+                            <td>{{ pension_detail[0].rating}}</td>
+                            {% else %}
+                            <td>리뷰평점</td>
+                            <td>리뷰평점 -> 미제공</td>
+                            {% endif %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <!--2번테이블-->
+        <div class='col'>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>숙소시설</h4>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">내용</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>{{ pension_detail[0].ammen1}}</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>{{ pension_detail[0].ammen2}}</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>{{ pension_detail[0].ammen3 }}</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>{{ pension_detail[0].ammen4 }}</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>{{ pension_detail[0].ammen5 }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <!--3번테이블-->
+        <div class='col'>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>가장 가까운 편의시설</h4>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">종류</th>
+                            <th scope="col">명칭</th>
+                            <th scope="col">거리</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>병원</td>
+                            <td>{{ near_hospital.name.values[0] }}</td>
+                            <td>{{ near_hospital.haver.values[0] }}Km</td>
+                        </tr>
+                        <tr>
+                            <td>병원(일요일)</td>
+                            <td>{{ near_hospital_sun.name.values[0] }}</td>
+                            <td>{{ near_hospital_sun.haver.values[0]}}Km</td>
+                        </tr>
+                        <tr>
+                            <td>약국</td>
+                            <td>{{ near_parm.name.values[0]}}</td>
+                            <td>{{ near_parm.haver.values[0]}}Km</td>
+                        </tr>
+                        <tr>
+                            <td>마트</td>
+                            <td>{{ near_mart.name.values[0] }}</td>
+                            <td>{{ near_mart.haver.values[0] }}Km</td>
+                        </tr>
+                        <tr>
+                            <td>경찰서</td>
+                            <td>{{ near_police.name.values[0] }}</td>
+                            <td>{{ near_police.haver.values[0] }}Km</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+    <div class='table60'>
+        <h1>숙소 주변 편의시설 지도</h1>
+
+        <table style="height: 50px ;">
+            <tbody>
+            <td>병원</td>
+            <td style="background-color: orange; border: 1px solid black; padding: 2px;">orange</td>
+            <td></td>
+            <td>경찰서</td>
+            <td style="background-color: blue; border: 1px solid black; padding: 2px;">blue</td>
+            <td></td>
+            <td>마트</td>
+            <td style="background-color: purple; border: 1px solid black; padding: 2px;">purple</td>
+            <td></td>
+            <td>은행</td>
+            <td style="background-color: red; border: 1px solid black; padding: 2px;">red</td>
+            <td></td>
+            <td>약국</td>
+            <td style="background-color: green; border: 1px solid black; padding: 2px;">green</td>
+            </tbody>
+        </table>
+
+
+        {{ iframe|safe }}
+        <input type="button" class="btn btn-info"
+               value="뒤로가기" onclick="history.back();" style="float: right;"/>
+    </div>
+</div>
+
+
+</body>
+{% endblock %}
+

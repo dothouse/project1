@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+<div class="container my-3">
+    <h1>주변 {{ info_type }} ( {{ select_type }} 정보)</h1>
+    <div>
+        <input type="button" class="btn "
+               value="처음으로 가기" onclick="location.href='/select/select1';"
+               style="background-color : #7FFF00; float: left;"/>
+
+        <input type="button" class="btn "
+               value="뒤로가기" onclick="history.back()" style="background-color : #caacd7; float: right;"/>
+
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+            <tr class="table-dark">
+                <th>제목</th>
+                <th>주소</th>
+                <th>거리</th>
+            </tr>
+            </thead>
+            <tbody>
+<!-- 최단거리 10개를 표의 각 행에 넣어주기 -->
+            {% for i in range(df_haver|length) %}
+                {% if df_haver_short.name[i]|length > 0 %}
+            <tr>
+                <td>
+                    {{ df_haver_short.name[i] }}
+                </td>
+                <td>
+                    {{ df_haver_short.addr[i] }}
+                </td>
+                <td>
+                    {{ df_haver_short.haver[i] }} Km
+                </td>
+            </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+{% endblock %}

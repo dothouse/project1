@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+    <div class=" container p-3 text-bg-dark">
+        <h1> 주변 날씨 통계</h1>
+    </div>
+</head>
+<body>
+<div class="container my-3">
+    <div>
+        <h1>주변 기상관측소 정보</h1>
+        <input type="button" class="btn "
+               value="처음으로 가기" onclick="location.href='/select/select1';"
+               style="background-color : #7FFF00; float: left;"/>
+
+        <input type="button" class="btn "
+               value="뒤로가기" onclick="history.back()" style="background-color : #caacd7; float: right;"/>
+
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+            <tr class="table-dark">
+                <th>구분</th>
+                <th>명칭</th>
+                <th>주소</th>
+<!--                <th>거리</th>-->
+                <th>그래프</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td> 기상 - 온도, 강수량</td>
+                <td> {{ wp_haver_short.name.values[0] }} 관측소</td>
+                <td> {{ wp_haver_short.addr.values[0] }}</td>
+<!--                <td> {{ wp_haver_short.haver.values[0] }} Km</td>-->
+                <td>
+                    <form action='{{ url_for("weather.weather_fig", point = wp_haver_short.name.values[0]) }}'
+                          method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="wp_name" value="{{ wp_haver_short.name.values[0] }}">
+                        <input type='submit' class="btn btn-success" value='기상 보러가기'>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td> 미세먼지</td>
+                <td> {{ pm_haver_short.name.values[0] }} 관측소</td>
+                <td> {{ pm_haver_short.addr.values[0] }}</td>
+<!--                <td> {{ pm_haver_short.haver.values[0] }} Km</td>-->
+                <td>
+                    <form action='{{ url_for("weather.pm_fig", point = pm_haver_short.name.values[0]) }}' method="post"
+                          class='dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type="hidden" name="pm_name" value="{{  pm_haver_short.name.values[0] }}">
+                        <input type='submit' class="btn btn-success" value='미세먼지 보러가기'>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<!--    <div>-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr class="table-dark">-->
+<!--                <th>월별</th>-->
+<!--                <th>기온</th>-->
+<!--                <th>강수량</th>-->
+<!--                <th>미세먼지</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <td> {{ weather_detail[0].month }}</td>-->
+<!--                <td> {{ weather_detail[0].temperature }}</td>-->
+<!--                <td> {{ weather_detail[0].rain }}</td>-->
+<!--                <td> {{ pm_detail[0] }}</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+</div>
+
+</body>
+</html>
+{% endblock %}

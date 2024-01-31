@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    th,td{
+              width: 200px;
+              height: 50px;
+        }
+
+</style>
+<head>
+    <div class="container p-3 text-bg-dark">
+        <h1>당신의 여행 타입은 아래와 같습니다.</h1>
+    </div>
+</head>
+<body>
+<div class='container'>
+    <div>
+        <input type="button" class="btn "
+               value="처음으로 가기" onclick="location.href='/select/select1';"
+               style="background-color : #7FFF00; float: left;"/>
+
+        <input type="button" class="btn "
+               value="뒤로가기" onclick="history.back();" style="background-color : #caacd7; float: right;"/>
+
+    </div>
+    <h2> 선택사항</h2>
+</div>
+<div class='container'>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col ">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>선호 관광 유형</h4>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">옵션</th>
+                            <th scope="col">선택값</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>여행타입</td>
+                            <td>{{select_value.month_str}}</td>
+                        </tr>
+                        <tr>
+                            <td>관광타입</td>
+                            <td>{{select_value.spot1_str}}</td>
+                        </tr>
+                        <tr>
+                            <td>관광타입2</td>
+                            <td>{{select_value.spot2_str}}</td>
+                        </tr>
+                        <tr>
+                            <td>맛집타입</td>
+                            <td>{{select_value.food_str}}</td>
+                        </tr>
+                        <tr>
+                            <td>반려동물</td>
+                            <td>{{ select_value.pet_str }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
+
+        </div>
+        <div class='col'>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>숙소 시설</h4>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">옵션</th>
+                            <th scope="col">선택값</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>수영장</td>
+                            <td>{{ '선택' if select_value.pool == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>마당</td>
+                            <td>{{ '선택' if select_value.garden == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>바다주변</td>
+                            <td>{{ '선택' if select_value.sea == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>관리비 없음</td>
+                            <td>{{ '선택' if select_value.nocost == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>대중교통</td>
+                            <td>{{ '선택' if select_value.bus == 1 else '미선택' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <div class='col'>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4>생활편의시설</h4>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">옵션</th>
+                            <th scope="col">선택값</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>경찰서</td>
+                            <td>{{ '선택' if select_value.police == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>병원</td>
+                            <td>{{ '선택' if select_value.hospital == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>은행</td>
+                            <td>{{ '선택' if select_value.bank == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>마트</td>
+                            <td>{{ '선택' if select_value.mart == 1 else '미선택' }}</td>
+                        </tr>
+                        <tr>
+                            <td>기념품샵</td>
+                            <td>{{ '선택' if select_value.gift == 1 else '미선택' }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class='col-lg-6 col-md-8 mx-auto' style='width: 400px; left_margin : 20px;'>
+        <!--                <input type="button" class="btn btn-danger"-->
+        <!--                       value="다시 선택" onclick="history.back();" />-->
+        <input type="button" class="btn btn-success" style='margin-left: 100px;'
+               value="숙소선택으로" onclick="location.href='/select/select3'"/>
+    </div>
+
+</div>
+</body>
+</html>
+{% endblock %}

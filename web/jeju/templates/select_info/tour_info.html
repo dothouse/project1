@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+    <div class=" container p-3 text-bg-dark">
+        <h1>관광 정보</h1>
+    </div>
+</head>
+    <body>
+    <div class=" container">
+
+
+        <div>
+            <input type="button" class="btn "
+                                   value="처음으로 가기" onclick="location.href='/select/select1';" style="background-color : #7FFF00; float: left;"/>
+
+            <input type="button" class="btn "
+                                   value="뒤로가기" onclick="location.href='/select/select3';" style="background-color : #caacd7; float: right;"/>
+
+        </div>
+            <div style="padding-bottom : 0px">
+                <!-- 지도에 볼 내용 선택하고 sumbit 하면  -->
+                <form action='' method="post" class = '' data-bs-theme="light"  name = 'tour_submit' >
+                    <div class="form-check form-check-inline">
+                            <p class="form-check form-check-inline"> 지도보기 선택 : </p>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input " type="checkbox" id="tour" name="tour" {% if tour_selected %} checked {% endif %}>
+                        <label class="form-check-label " for="tour">관광지 <span style="background-color: orange; border: 1px solid orange; padding: 2px; fill = orange">orange</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input " type="checkbox" id="food" name="food"  {% if food_selected %} checked {% endif %}>
+                        <label class="form-check-label " for="food">맛집 <span style="background-color: red;  padding: 2px; fill = red">red</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input " type="checkbox" id="gift" name="gift" {% if gift_selected %} checked {% endif %}>
+                        <label class="form-check-label " for="gift">기념품샵 <span style="background-color: green;  padding: 2px; fill = green">green</span></label>
+                    </div>
+
+                    <input type="hidden" name="finalPension" value="{{ pension_name }}">
+                    <input type ='submit' class="btn btn-warning" value="선택완료">
+
+                </form>
+            </div>
+
+            <!-- 지도!!!   -->
+            {{ iframe|safe }}
+
+
+
+         <div style="padding-top : 0px">
+             <div class="form-check form-check-inline">
+                <p> 정보 더보기: </p>
+             </div>
+
+            <div class="form-check form-check-inline">
+<!--                <p> 관광지 <span style="background-color: orange; border: 1px solid orange; padding: 2px; fill = orange">orange</span> </p>-->
+                <form action='/info/tour' method="post" class = '' data-bs-theme="light"  name = 'tour_submit' >
+                    <input type="hidden" name="finalPension" value="{{ pension_name }}">
+                    <input type ='submit' class="btn btn-warning" name = 'more' value="관광지 더보기" onclick="location.href='/info/tour'" />
+                </form>
+            </div>
+
+            <div class="form-check form-check-inline">
+<!--                <p> 맛집 <span style="background-color: red; border: 1px solid orange; padding: 2px; fill = orange;">red</span> </p>-->
+                <form action='/info/tour' method="post" class = '' data-bs-theme="light"  name = 'tour_submit' >
+                    <input type="hidden" name="finalPension" value="{{ pension_name }}">
+                    <input type ='submit' class="btn btn-danger" name = 'more' value="맛집 더보기" onclick="location.href='/info/tour'" />
+                </form>
+            </div>
+
+            <div class="form-check form-check-inline">
+<!--                <p> 기념품 <span style="background-color: green; border: 1px solid orange; padding: 2px; fill = orange;">green</span> </p>-->
+                <form action='/info/tour' method="post" class = '' data-bs-theme="light"  name = 'tour_submit' >
+                    <input type="hidden" name="finalPension" value="{{ pension_name }}">
+                    <input type ='submit' class="btn btn-success" name = 'more' value="기념품 더보기" onclick="location.href='/info/tour'" />
+                </form>
+            </div>
+             <div class="form-check form-check-inline">
+<!--                <p> 기념품 <span style="background-color: green; border: 1px solid orange; padding: 2px; fill = orange;">green</span> </p>-->
+                <form action='/info/weather' method="post" class = '' data-bs-theme="light"  name = 'tour_submit' >
+                    <input type="hidden" name="finalPension" value="{{ pension_name }}">
+                    <input type ='submit' class="btn btn-primary" name = 'more' value="날씨 더보기" onclick="location.href='/info/weather'" />
+                </form>
+            </div>
+             <div class="form-check form-check-inline">
+<!--                <p> 기념품 <span style="background-color: green; border: 1px solid orange; padding: 2px; fill = orange;">green</span> </p>-->
+                <form action='/info/olleh' method="post" class = '' data-bs-theme="light"  name = 'tour_submit' >
+                    <input type="hidden" name="finalPension" value="{{ pension_name }}">
+                    <input type ='submit' class="btn btn-info" name = 'more' value="올레길 더보기" onclick="location.href='/info/olleh'" />
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
+
+{% endblock %}

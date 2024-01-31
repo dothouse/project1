@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+ table{ border-collapse : collapse; }  /*이중선 제거*/
+ th,td{
+      width: 200px;
+      height: 50px;
+      text-align: center;
+      border: 1px solid #000;
+
+      vertical-align: top;	/* 위 */
+      vertical-align: bottom;   /* 아래 */
+      vertical-align: middle;   /* 가운데 */
+    }
+
+</style>
+
+<head>
+
+    <div class="p-3 text-bg-dark">
+        <h2>당신의 여행 타입은 아래와 같습니다.</h2>
+    </div>
+</head>
+    <body>
+    <section >
+        <div class="container">
+            <h2> 필수선택</h2>
+            <ul>
+                <li>여행타입 : {{tourType}}</li>
+                <li>관광타입 : {{spot1Type}}</li>
+                <li>관광세부타입 : {{spot2Type}}</li>
+                <li>맛집타입</li>
+            </ul>
+        </div>
+        <div class="container">
+            <h2> 추가선택</h2>
+            <ul>
+                <li></li>
+                <li>반려동물 동반: {{pet_str}}</li>
+                <li>기념품샵 : {{gift_str}}</li>
+                <li>경찰서 : {{police_str}}</li>
+                <li>버스 : {{bus_str}}</li>
+            </ul>
+        </div>
+        <div class="container">
+            <table class ='' >
+                <thead>
+                    <tr>
+                        <th>      </th>
+                        <th>선택값</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>여행타입</td>
+                        <td>{{tourType}}</td>
+                    </tr>
+                    <tr>
+                        <td>관광타입</td>
+                        <td>{{spot1Type}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="container">
+            <input type="button" class="btn btn-dark"
+                   value="다시 선택" onclick="history.back();" />
+
+<!--            <input type="button" class="btn btn-success"-->
+<!--                   value="숙소선택으로" onclick="location.href='/select/select3'" />-->
+
+        </div>
+    </section>
+    <section >
+    <div class= "badge bg-light text-dark p-2 text-start">
+            <h3>원하는 숙소를 선택해주세요</h3>
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <h4>숙소1</h4>
+                    <p>숙소이름 -> {{ test[test['score'] == score1]['name'].values[0] }}</p>
+                    <p>숙소점수 -> {{score1}}</p>
+
+                    <p>주변 병원 갯수 -> {{ test[test['score'] == score1]['hospital'].values[0] }}</p>
+                    <p>주변 약국 갯수 -> {{ test[test['score'] == score1]['parm'].values[0] }}</p>
+                    <p>주변 마트 갯수 -> {{ test[test['score'] == score1]['mart'].values[0] }}</p>
+                    <p>주변 은행 갯수 -> {{ test[test['score'] == score1]['bank'].values[0] }}</p>
+                    <p>주변 경찰 갯수 -> </p>
+                    <form action='pension' method="post" class = 'dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type = 'submit' class="btn btn-info" name = 'pension_info' value = {{ test[test['score'] == score1]['name'].values[0] }}>
+                    </form>
+                </li>
+
+                <li class="list-group-item">
+                    <h4>숙소2</h4>
+                    <p>숙소이름 -> {{ test[test['score'] == score2]['name'].values[0] }}</p>
+                    <p>숙소점수 -> {{score2}}</p>
+
+                    <p>주변 병원 갯수 -> {{ test[test['score'] == score2]['hospital'].values[0] }}</p>
+                    <p>주변 약국 갯수 -> {{ test[test['score'] == score2]['parm'].values[0] }}</p>
+                    <p>주변 마트 갯수 -> {{ test[test['score'] == score2]['mart'].values[0] }}</p>
+                    <p>주변 은행 갯수 -> {{ test[test['score'] == score2]['bank'].values[0] }}</p>
+                    <p>주변 경찰 갯수 -> </p>
+                    <form action='pension' method="post" class = 'dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type = 'submit' class="btn btn-info" name = 'pension_info' value = {{ test[test['score'] == score2]['name'].values[0] }}>
+                    </form>
+
+
+                <li class="list-group-item">
+                    <h4>숙소3</h4>
+                    <p>숙소이름 -> {{ test[test['score'] == score3]['name'].values[0] }}</p>
+                    <p>숙소점수 -> {{score3}}</p>
+
+                    <p>주변 병원 갯수 -> {{ test[test['score'] == score3]['hospital'].values[0] }}</p>
+                    <p>주변 약국 갯수 -> {{ test[test['score'] == score3]['parm'].values[0] }}</p>
+                    <p>주변 마트 갯수 -> {{ test[test['score'] == score3]['mart'].values[0] }}</p>
+                    <p>주변 은행 갯수 -> {{ test[test['score'] == score3]['bank'].values[0] }}</p>
+                    <p>주변 경찰 갯수 -> </p>
+                    <form action='pension' method="post" class = 'dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                        <input type = 'submit' class="btn btn-info" name = 'pension_info' value = {{ test[test['score'] == score3]['name'].values[0] }}>
+                    </form>>
+            </ul>
+
+            <form action='/result' method="post" class = 'dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px'>
+                 <p>숙소를 결정하셨습니까?</p>
+                 <select name="finalPension" id="final">
+                     <option value="finalPension1">숙소1</option>
+                     <option value="finalPension2">숙소2</option>
+                     <option value="finalPension3">숙소3</option>
+                 <input type = 'submit' class="btn btn-warning">
+            </form>
+        </div>
+        </section>
+
+    </body>
+</html>
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $("button[name=pension_info]").click(function () {
+                $("form[name=pension_info]")
+                .attr({ action: "/pension1?value="+$(this).val(), method: "post" })
+                .submit();
+            });
+        });
+
+</script>
+{% endblock %}
